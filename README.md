@@ -40,6 +40,7 @@ You shouldn't commit `terraform.auto.tfvars` to any source code repository!
 * Terraform installed
 * AWS CLI configured (with relevant IAM permissions)
 * Terraform configuration modified
+* Valid Vault Enterprise license
 
 We now need to create a `VPC` and an `AWS Secrets Manager` __before__ we run the Vault provider.
 
