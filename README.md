@@ -41,6 +41,8 @@ You shouldn't commit `terraform.auto.tfvars` to any source code repository!
 * AWS CLI configured (with relevant IAM permissions)
 * Terraform configuration modified
 
+### Deployment
+
 We now need to create a `VPC` and an `AWS Secrets Manager` __before__ we run the Vault provider.
 
 In the repo, this is a one time action, but is a bit fiddly, and doesn't feel very Terraform'y.
@@ -73,7 +75,35 @@ You can now run the standard Terraform commands in your directory:
 
 Review and accept the plan output in order to apply into AWS. When this is complete you can uncomment `vault-ent-starter' and re-run the Terraform commands above to deploy Vault.
 
+### Initialization
+
+__NOTE:__ These instructions are lifted from the `vault-ent-starter` GitHub repository linked at the top of this README.
+
+We now need to [initialize the Vault cluster](https://www.vaultproject.io/docs/commands/operator/init#operator-init). Log into a node (EC2 instance) via SSH/Session Manager etc. and run the following commands.
+
+```bash
+sudo -i
+vault operator init
+```
+You should then see a `Success! Vault is intialized` message along with your `recovery keys` and a `root token`.
+
+Recovery keys should be treated as __secret__ and stored individually.
+
+Export your Vault root token so you can interact with Vault via the CLI.
+
+```bash
+export VAULT_TOKEN="<YOUR_VAULT_TOKEN>"
+```
+
+You can now unseal Vault using the `vault operator unseal` command and supplying the unseal keys one by one. Once you've unsealed the node the other nodes will automatically be unsealed via the AWS KMS.
+
 ## Notes
 
 * Your Vault license file __must__ be stored locally on your filesystem, there currently isn't a way to supply it via base64 encoded variable etc.
 * For some reason the `vault-ent-starter` module currently disables [performance standby nodes](https://www.vaultproject.io/docs/enterprise/performance-standby), which we wouldn't recommend for a deployment.
+
+## License
+
+This code is released under the Mozilla Public License 2.0. Please see
+[LICENSE](https://github.com/hashicorp/terraform-aws-vault-ent-starter/blob/main/LICENSE)
+for more details.
