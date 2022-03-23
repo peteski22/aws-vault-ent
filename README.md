@@ -13,7 +13,7 @@ This repo copy/pastes the example modules referenced above (under `/modules/`) a
 To supply variables to Terraform, you can use a `terraform.auto.tfvars` file. Please see an example below.
 
 ```terraform
-vault_version          = "1.9.3"
+vault_version          = "1.9.4"
 vault_license_filepath = "/PATH_TO_YOUR_LICENSE_FILE/vault.hclic"
 vault_license_name     = "vault.hclic"
 resource_name_prefix   = "temp-test"
