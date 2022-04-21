@@ -74,7 +74,7 @@ You can now run the standard Terraform commands in your directory:
 1. `terraform init`
 2. `terraform apply`
 
-Review and accept the plan output in order to apply into AWS. When this is complete you can uncomment `vault-ent-starter' and re-run the Terraform commands above to deploy Vault.
+Review and accept the plan output in order to apply into AWS. When this is complete you can uncomment `vault-ent-starter` and re-run the Terraform commands above to deploy Vault.
 
 ### Initialization
 
