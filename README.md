@@ -28,7 +28,11 @@ azs = [
 ]
 aws_region = "eu-west-1"
 ```
-In the example above, the `vault_license_name` property must contain the same file name as appears in the `vault_license_filepath` property. Please ensure that the `azs` you want to deploy to are part of the `aws_region` supplied.
+In the example above, the `vault_license_name` property is the name of the file you want to be created in S3 when the local license file is uploaded. 
+
+`vault_license_filepath` property must be the absolute path to the license file on your local machine. 
+
+Please ensure that the `azs` you want to deploy to are part of the `aws_region` supplied.
 
 You shouldn't commit `terraform.auto.tfvars` to any source code repository!
 
@@ -100,8 +104,7 @@ You can now unseal Vault using the `vault operator unseal` command and supplying
 
 ## Notes
 
-* Your Vault license file __must__ be stored locally on your filesystem, there currently isn't a way to supply it via base64 encoded variable etc.
-* For some reason the `vault-ent-starter` module currently disables [performance standby nodes](https://www.vaultproject.io/docs/enterprise/performance-standby), which we wouldn't recommend for a deployment.
+* Your Vault license file __must__ be stored locally on your filesystem, there currently isn't a way to supply it via `base64` encoded variable etc.
 
 ## License
 
